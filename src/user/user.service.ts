@@ -44,6 +44,18 @@ export class UserService {
     }
   }
 
+  async findByMail(email: string) {
+    try {
+      const user = await this.userModel.findOne({ email });
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+      return user;
+    } catch (err) {
+      throw new HttpException(err.response, err.status);
+    }
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto) {
     try {
       const user = await this.userModel.findById(id);

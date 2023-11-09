@@ -45,6 +45,18 @@ export class StudentService {
     }
   }
 
+  async findByMail(email: string) {
+    try {
+      const student = await this.studentModel.findOne({ email });
+      if (!student) {
+        throw new NotFoundException('Student not found');
+      }
+      return student;
+    } catch (err) {
+      throw new HttpException(err.response, err.status);
+    }
+  }
+
   async update(id: string, updateStudentDto: UpdateStudentDto) {
     try {
       const student = await this.studentModel.findById(id);
