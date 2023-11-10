@@ -25,6 +25,15 @@ export class AuthService {
     });
 
     user.authToken = token;
+    await user.save();
+    return user;
+  }
+
+  async signOutUser(req) {
+    const user = await this.userService.findOne(req.user._id);
+    user.authToken = '';
+    await user.save();
+    return 'Logout Successfull';
   }
 
   async signInStudent(email: string, pass: string) {
@@ -40,5 +49,13 @@ export class AuthService {
     });
 
     student.authToken = token;
+    await student.save();
+    return student;
+  }
+  async signOutStudent(req) {
+    const student = await this.studentService.findOne(req.user._id);
+    student.authToken = '';
+    await student.save();
+    return 'Logout Successfull';
   }
 }
