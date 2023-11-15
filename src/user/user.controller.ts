@@ -19,6 +19,7 @@ import { Roles } from './enums/roles';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  //creates new user in DB
   @Role(Roles.Admin)
   @UseGuards(AuthGuard)
   @Post()
@@ -26,6 +27,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  //lists all users in DB
   @Role(Roles.Admin)
   @UseGuards(AuthGuard)
   @Get()
@@ -33,12 +35,14 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  //finds one user using ID
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
   }
 
+  //updates a user in DB
   @Role(Roles.Admin)
   @UseGuards(AuthGuard)
   @Patch(':id')
@@ -46,6 +50,7 @@ export class UserController {
     return this.userService.update(id, updateUserDto);
   }
 
+  //removes a user from DB
   @Role(Roles.Admin)
   @UseGuards(AuthGuard)
   @Delete(':id')

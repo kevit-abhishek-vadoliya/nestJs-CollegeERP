@@ -21,6 +21,7 @@ export class AttendanceController {
     private studentService: StudentService,
   ) {}
 
+  //adds attendance of students
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Post()
@@ -28,6 +29,7 @@ export class AttendanceController {
     return this.attendanceService.addAttendance(addAttendanceDto);
   }
 
+  //gets all absent students on particular date
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Post('/absent')
@@ -40,6 +42,7 @@ export class AttendanceController {
     );
   }
 
+  //gets students with attendance less than 75%
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Post('/lessAttendance')
@@ -51,6 +54,7 @@ export class AttendanceController {
     );
   }
 
+  //gets year wise analysis of every batch total students and whole college
   @Role(Roles.Admin)
   @UseGuards(AuthGuard, RolesGuard)
   @HttpCode(200)
@@ -59,6 +63,7 @@ export class AttendanceController {
     return this.studentService.getYearlyAnalysis();
   }
 
+  //gets year wise vacant seats for every branch and whole college
   @Role(Roles.Admin)
   @UseGuards(AuthGuard, RolesGuard)
   @HttpCode(200)

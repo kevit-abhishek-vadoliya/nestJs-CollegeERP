@@ -14,6 +14,11 @@ import { Model } from 'mongoose';
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
+  /**
+   * creates new user in database
+   * @param createUserDto object for creating user
+   * @returns object of created user
+   */
   async create(createUserDto: CreateUserDto) {
     try {
       const user = await this.userModel.create(createUserDto);
@@ -23,6 +28,10 @@ export class UserService {
     }
   }
 
+  /**
+   * lists all users in the database
+   * @returns array of all users
+   */
   async findAll() {
     try {
       const users = await this.userModel.find();
@@ -32,6 +41,11 @@ export class UserService {
     }
   }
 
+  /**
+   * finds an user in DB using Id
+   * @param id id of the user you want to find
+   * @returns object of the user
+   */
   async findOne(id: string) {
     try {
       const user = await this.userModel.findById(id);
@@ -44,6 +58,11 @@ export class UserService {
     }
   }
 
+  /**
+   * finds a user from DB using email
+   * @param email email of the user you want to find
+   * @returns object of the user
+   */
   async findByMail(email: string) {
     try {
       const user = await this.userModel.findOne({ email });
@@ -56,6 +75,12 @@ export class UserService {
     }
   }
 
+  /**
+   * updates the user using given id
+   * @param id id of user you want to find
+   * @param updateUserDto object conataining properties you want to update
+   * @returns object of updated user
+   */
   async update(id: string, updateUserDto: UpdateUserDto) {
     try {
       const user = await this.userModel.findById(id);
@@ -69,6 +94,11 @@ export class UserService {
     }
   }
 
+  /**
+   * deletes a user from the database
+   * @param id id of the user you want to delete
+   * @returns object of the deleted user
+   */
   remove(id: string) {
     try {
       const user = this.userModel.findByIdAndDelete(id);

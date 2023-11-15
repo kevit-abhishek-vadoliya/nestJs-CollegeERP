@@ -34,6 +34,7 @@ export class Student {
 
 export const StudentSchema = SchemaFactory.createForClass(Student);
 
+//HAshing password before storing into DB
 StudentSchema.pre('save', async function (next) {
   try {
     if (this.isModified('password')) {

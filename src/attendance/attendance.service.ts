@@ -6,6 +6,10 @@ import { StudentService } from 'src/student/student.service';
 export class AttendanceService {
   constructor(private readonly studentService: StudentService) {}
 
+  /**
+   * adds attendandance of every students
+   * @param addAttendanceDto array of attendace objects for every students
+   */
   async addAttendance(addAttendanceDto: [AddAttendanceDto]) {
     try {
       addAttendanceDto.map(async (attendance: AddAttendanceDto) => {

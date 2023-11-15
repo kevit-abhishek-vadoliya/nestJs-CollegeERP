@@ -26,6 +26,7 @@ export class User {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
+//Hashes password before storinh into DB
 UserSchema.pre('save', async function (next) {
   try {
     if (this.isModified('password')) {
