@@ -78,7 +78,7 @@ export class StudentService {
   }
 
   /**
-   * updates the student using given id 
+   * updates the student using given id
    * @param id id of student you want to find
    * @param updateStudentDto object conataining properties you want to update
    * @returns object of updated student
@@ -96,7 +96,6 @@ export class StudentService {
     }
   }
 
-
   /**
    * deletes a student from the database
    * @param id id of the student you want to delete
@@ -113,7 +112,6 @@ export class StudentService {
       throw new HttpException(err.response, err.status);
     }
   }
-
 
   /**
    * lists the absent student on particulare date
@@ -321,7 +319,6 @@ export class StudentService {
     }
   }
 
-
   /**
    * get year wise analyss of total students in all batches and college
    * @returns Array of yearly analysis of total students batchwise
@@ -412,12 +409,11 @@ export class StudentService {
     }
   }
 
-
   /**
    * get list of year wise vacant seats in all the branches and whole college
    * @param batchYear (optional) for filtering
    * @param branch (optional) for filtering
-   * @returns array of year wise vacant seats 
+   * @returns array of year wise vacant seats
    */
   async getVacnatSeats(
     batchYear: number = undefined,
