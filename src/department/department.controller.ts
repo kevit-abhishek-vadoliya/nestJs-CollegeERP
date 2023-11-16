@@ -20,6 +20,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 export class DepartmentController {
   constructor(private readonly departmentService: DepartmentService) {}
 
+  //creates new department in DB
   @Role(Roles.Admin)
   @UseGuards(AuthGuard, RolesGuard)
   @Post()
@@ -27,11 +28,13 @@ export class DepartmentController {
     return this.departmentService.create(createDepartmentDto);
   }
 
+  //lists all departments in DB
   @Get()
   findAll() {
     return this.departmentService.findAll();
   }
 
+  //finds one department by ID
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Get(':id')
@@ -39,6 +42,7 @@ export class DepartmentController {
     return this.departmentService.findOne(id);
   }
 
+  //updates a department
   @Role(Roles.Admin)
   @UseGuards(AuthGuard, RolesGuard)
   @Patch(':id')
@@ -49,6 +53,7 @@ export class DepartmentController {
     return this.departmentService.update(id, updateDepartmentDto);
   }
 
+  //deletes a department from DB
   @Role(Roles.Admin)
   @UseGuards(AuthGuard, RolesGuard)
   @Delete(':id')

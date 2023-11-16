@@ -20,6 +20,7 @@ import { RolesGuard } from 'src/auth/roles.guard';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
+  //creates new student in DB
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Post()
@@ -27,6 +28,7 @@ export class StudentController {
     return this.studentService.create(createStudentDto);
   }
 
+  //lists all students in DB
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Get()
@@ -34,6 +36,7 @@ export class StudentController {
     return this.studentService.findAll();
   }
 
+  //finds one student using id
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Get(':id')
@@ -41,6 +44,7 @@ export class StudentController {
     return this.studentService.findOne(id);
   }
 
+  //updates the student
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Patch(':id')
@@ -48,6 +52,7 @@ export class StudentController {
     return this.studentService.update(id, updateStudentDto);
   }
 
+  //deletes a student from DB
   @Role(Roles.Admin, Roles.Faculty)
   @UseGuards(AuthGuard, RolesGuard)
   @Delete(':id')

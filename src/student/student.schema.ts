@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as bcrypt from 'bcryptjs';
-import mongoose, { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 @Schema()
 export class Student {
@@ -10,8 +10,8 @@ export class Student {
   @Prop()
   contactNo: number;
 
-  @Prop({ ref: 'department' })
-  department: Types.ObjectId;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'departments' })
+  department: string;
 
   @Prop()
   batchYear: number;
@@ -34,6 +34,7 @@ export class Student {
 
 export const StudentSchema = SchemaFactory.createForClass(Student);
 
+//HAshing password before storing into DB
 StudentSchema.pre('save', async function (next) {
   try {
     if (this.isModified('password')) {

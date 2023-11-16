@@ -9,7 +9,7 @@ export class Department {
   initial: string;
 
   @Prop({ required: true })
-  totalStudentsIntake: string;
+  totalStudentsIntake: number;
 }
 
 export const DepartmentSchema = SchemaFactory.createForClass(Department);
