@@ -7,12 +7,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
-import { Role } from 'src/decorators/roles.decorator';
-import { Roles } from 'src/user/enums/roles';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { Role } from '../decorators/roles.decorator';
+import { Roles } from '../user/enums/roles';
+import { AuthGuard } from '../auth/auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
 import { AddAttendanceDto } from './dto/add-attendance.dto';
-import { StudentService } from 'src/student/student.service';
+import { StudentService } from '../student/student.service';
 
 @Controller('attendance')
 export class AttendanceController {

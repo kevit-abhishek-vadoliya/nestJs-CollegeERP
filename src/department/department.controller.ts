@@ -11,10 +11,10 @@ import {
 import { DepartmentService } from './department.service';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { Role } from 'src/decorators/roles.decorator';
-import { Roles } from 'src/user/enums/roles';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { AuthGuard } from '../auth/auth.guard';
+import { Role } from '../decorators/roles.decorator';
+import { Roles } from '../user/enums/roles';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('department')
 export class DepartmentController {

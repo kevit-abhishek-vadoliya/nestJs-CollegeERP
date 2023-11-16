@@ -4,7 +4,7 @@ import { StudentController } from './student.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Student, StudentSchema } from './student.schema';
 import { JwtModule } from '@nestjs/jwt';
-import { UserModule } from 'src/user/user.module';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [

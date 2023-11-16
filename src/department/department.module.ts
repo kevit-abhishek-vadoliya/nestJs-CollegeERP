@@ -4,8 +4,8 @@ import { DepartmentController } from './department.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Department, DepartmentSchema } from './department.schema';
 import { JwtModule } from '@nestjs/jwt';
-import { UserModule } from 'src/user/user.module';
-import { StudentModule } from 'src/student/student.module';
+import { UserModule } from '../user/user.module';
+import { StudentModule } from '../student/student.module';
 
 @Module({
   imports: [

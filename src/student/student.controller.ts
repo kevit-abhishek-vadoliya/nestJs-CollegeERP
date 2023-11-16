@@ -11,10 +11,10 @@ import {
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { Role } from 'src/decorators/roles.decorator';
-import { Roles } from 'src/user/enums/roles';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { AuthGuard } from '../auth/auth.guard';
+import { Role } from '../decorators/roles.decorator';
+import { Roles } from '../user/enums/roles';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('students')
 export class StudentController {

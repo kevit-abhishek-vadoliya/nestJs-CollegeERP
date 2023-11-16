@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { AddAttendanceDto } from './dto/add-attendance.dto';
-import { StudentService } from 'src/student/student.service';
+import { StudentService } from '../student/student.service';
 
 @Injectable()
 export class AttendanceService {
