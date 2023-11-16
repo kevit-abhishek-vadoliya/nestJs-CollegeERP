@@ -8,21 +8,25 @@ import { StudentService } from '../student/student.service';
 describe('DepartmentController', () => {
   let controller: DepartmentController;
 
-  const mockDepartmentService = {}
-  const mockStudentService={}
-  const mockJwtService={}
-  const mockUserService={}
+  const mockDepartmentService = {};
+  const mockStudentService = {};
+  const mockJwtService = {};
+  const mockUserService = {};
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [DepartmentController],
       providers: [DepartmentService, JwtService, UserService, StudentService],
     })
-    .overrideProvider(DepartmentService).useValue(mockDepartmentService)
-    .overrideProvider(StudentService).useValue(mockStudentService)
-    .overrideProvider(JwtService).useValue(mockJwtService)
-    .overrideProvider(UserService).useValue(mockUserService)
-    .compile();
+      .overrideProvider(DepartmentService)
+      .useValue(mockDepartmentService)
+      .overrideProvider(StudentService)
+      .useValue(mockStudentService)
+      .overrideProvider(JwtService)
+      .useValue(mockJwtService)
+      .overrideProvider(UserService)
+      .useValue(mockUserService)
+      .compile();
 
     controller = module.get<DepartmentController>(DepartmentController);
   });

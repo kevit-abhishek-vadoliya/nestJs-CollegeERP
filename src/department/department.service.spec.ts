@@ -6,14 +6,17 @@ import { getModelToken } from '@nestjs/mongoose';
 describe('DepartmentService', () => {
   let service: DepartmentService;
 
-  const mockDepartmentModel = {}
+  const mockDepartmentModel = {};
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [DepartmentService,{
-        provide: getModelToken(Department.name),
-        useValue: mockDepartmentModel
-      }],
+      providers: [
+        DepartmentService,
+        {
+          provide: getModelToken(Department.name),
+          useValue: mockDepartmentModel,
+        },
+      ],
     }).compile();
 
     service = module.get<DepartmentService>(DepartmentService);

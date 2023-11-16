@@ -6,13 +6,16 @@ import { Student } from './student.schema';
 describe('StudentService', () => {
   let service: StudentService;
 
-  const mockStudentModel={}
+  const mockStudentModel = {};
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [StudentService,{
-        provide: getModelToken(Student.name),
-        useValue: mockStudentModel
-      }],
+      providers: [
+        StudentService,
+        {
+          provide: getModelToken(Student.name),
+          useValue: mockStudentModel,
+        },
+      ],
     }).compile();
 
     service = module.get<StudentService>(StudentService);

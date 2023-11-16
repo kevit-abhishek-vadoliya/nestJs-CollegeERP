@@ -8,19 +8,24 @@ import { UserService } from '../user/user.service';
 describe('AuthService', () => {
   let service: AuthService;
 
-  const mockAttendanceService = {}
-  const mockStudentService={}
-  const mockJwtService={}
-  const mockUserService={}
-  
+  const mockAttendanceService = {};
+  const mockStudentService = {};
+  const mockJwtService = {};
+  const mockUserService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService,StudentService,JwtService,UserService],
-    }).overrideProvider(AttendanceService).useValue(mockAttendanceService)
-    .overrideProvider(StudentService).useValue(mockStudentService)
-    .overrideProvider(JwtService).useValue(mockJwtService)
-    .overrideProvider(UserService).useValue(mockUserService)
-    .compile();
+      providers: [AuthService, StudentService, JwtService, UserService],
+    })
+      .overrideProvider(AttendanceService)
+      .useValue(mockAttendanceService)
+      .overrideProvider(StudentService)
+      .useValue(mockStudentService)
+      .overrideProvider(JwtService)
+      .useValue(mockJwtService)
+      .overrideProvider(UserService)
+      .useValue(mockUserService)
+      .compile();
 
     service = module.get<AuthService>(AuthService);
   });

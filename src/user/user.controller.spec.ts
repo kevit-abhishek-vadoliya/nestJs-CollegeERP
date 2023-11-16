@@ -7,19 +7,22 @@ import { StudentService } from '../student/student.service';
 describe('UserController', () => {
   let controller: UserController;
 
-  const mockUserService = {}
-  const mockStudentService={}
-  const mockJwtService={}
+  const mockUserService = {};
+  const mockStudentService = {};
+  const mockJwtService = {};
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UserController],
       providers: [UserService, JwtService, StudentService],
     })
-    .overrideProvider(UserService).useValue(mockUserService)
-    .overrideProvider(StudentService).useValue(mockStudentService)
-    .overrideProvider(JwtService).useValue(mockJwtService)
-    .compile();
+      .overrideProvider(UserService)
+      .useValue(mockUserService)
+      .overrideProvider(StudentService)
+      .useValue(mockStudentService)
+      .overrideProvider(JwtService)
+      .useValue(mockJwtService)
+      .compile();
 
     controller = module.get<UserController>(UserController);
   });
