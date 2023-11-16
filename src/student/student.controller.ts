@@ -25,7 +25,7 @@ export class StudentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Post()
   create(@Body() createStudentDto: CreateStudentDto) {
-    return this.studentService.create(createStudentDto);
+    return this.studentService.createStudent(createStudentDto);
   }
 
   //lists all students in DB
@@ -33,7 +33,7 @@ export class StudentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Get()
   findAll() {
-    return this.studentService.findAll();
+    return this.studentService.findAllStudents();
   }
 
   //finds one student using id
@@ -41,7 +41,7 @@ export class StudentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.studentService.findOne(id);
+    return this.studentService.findOneStudent(id);
   }
 
   //updates the student
@@ -49,7 +49,7 @@ export class StudentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto) {
-    return this.studentService.update(id, updateStudentDto);
+    return this.studentService.updateStudent(id, updateStudentDto);
   }
 
   //deletes a student from DB
@@ -57,6 +57,6 @@ export class StudentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.studentService.remove(id);
+    return this.studentService.removeStudent(id);
   }
 }

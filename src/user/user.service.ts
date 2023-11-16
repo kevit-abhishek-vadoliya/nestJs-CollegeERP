@@ -17,12 +17,12 @@ export class UserService {
   /**
    * creates new user in database
    * @param createUserDto object for creating user
-   * @returns object of created user
+   * @returns {User} object of created user
    */
-  async create(createUserDto: CreateUserDto) {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     try {
-      const user = await this.userModel.create(createUserDto);
-      return user;
+      const userObj = await this.userModel.create(createUserDto);
+      return userObj;
     } catch (err) {
       throw new BadRequestException(err);
     }
@@ -30,9 +30,9 @@ export class UserService {
 
   /**
    * lists all users in the database
-   * @returns array of all users
+   * @returns {[User]} array of all users
    */
-  async findAll() {
+  async findAllUsers() {
     try {
       const users = await this.userModel.find();
       return users;
@@ -44,15 +44,15 @@ export class UserService {
   /**
    * finds an user in DB using Id
    * @param id id of the user you want to find
-   * @returns object of the user
+   * @returns {User} object of the user
    */
-  async findOne(id: string) {
+  async findOneUser(id: string) {
     try {
-      const user = await this.userModel.findById(id);
-      if (!user) {
+      const userObj = await this.userModel.findById(id);
+      if (!userObj) {
         throw new NotFoundException('User not found');
       }
-      return user;
+      return userObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -61,15 +61,15 @@ export class UserService {
   /**
    * finds a user from DB using email
    * @param email email of the user you want to find
-   * @returns object of the user
+   * @returns {User} object of the user
    */
-  async findByMail(email: string) {
+  async findUserByMail(email: string) {
     try {
-      const user = await this.userModel.findOne({ email });
-      if (!user) {
+      const userObj = await this.userModel.findOne({ email });
+      if (!userObj) {
         throw new NotFoundException('User not found');
       }
-      return user;
+      return userObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -78,17 +78,17 @@ export class UserService {
   /**
    * updates the user using given id
    * @param id id of user you want to find
-   * @param updateUserDto object conataining properties you want to update
-   * @returns object of updated user
+   * @param updateUserDto object containing properties you want to update
+   * @returns {User} object of updated user
    */
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     try {
-      const user = await this.userModel.findById(id);
-      if (!user) {
+      const userObj = await this.userModel.findById(id);
+      if (!userObj) {
         throw new NotFoundException('User Not Found');
       }
-      Object.assign(user, updateUserDto);
-      return user.save();
+      Object.assign(userObj, updateUserDto);
+      return userObj.save();
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -97,15 +97,15 @@ export class UserService {
   /**
    * deletes a user from the database
    * @param id id of the user you want to delete
-   * @returns object of the deleted user
+   * @returns {User} object of the deleted user
    */
-  remove(id: string) {
+  removeUser(id: string): Promise<User> {
     try {
-      const user = this.userModel.findByIdAndDelete(id);
-      if (!user) {
+      const userObj = this.userModel.findByIdAndDelete(id);
+      if (!userObj) {
         throw new NotFoundException('User not found');
       }
-      return user;
+      return userObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }

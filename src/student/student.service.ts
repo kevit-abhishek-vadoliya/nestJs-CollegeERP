@@ -19,12 +19,12 @@ export class StudentService {
   /**
    * creates new student in database
    * @param createStudentDto object for creating student
-   * @returns object of created student
+   * @returns {Student} object of created student
    */
-  async create(createStudentDto: CreateStudentDto) {
+  async createStudent(createStudentDto: CreateStudentDto): Promise<Student> {
     try {
-      const student = await this.studentModel.create(createStudentDto);
-      return student;
+      const studentObj = await this.studentModel.create(createStudentDto);
+      return studentObj;
     } catch (err) {
       throw new BadRequestException(err);
     }
@@ -32,9 +32,9 @@ export class StudentService {
 
   /**
    * lists all students in the database
-   * @returns array of all students
+   * @returns {[Student]} array of all students
    */
-  async findAll() {
+  async findAllStudents() {
     try {
       const students = await this.studentModel.find();
       return students;
@@ -46,15 +46,15 @@ export class StudentService {
   /**
    * finds one student from DB using id
    * @param id id of student you want to find
-   * @returns object of student
+   * @returns {Student}object of student
    */
-  async findOne(id: string) {
+  async findOneStudent(id: string) {
     try {
-      const student = await this.studentModel.findById(id);
-      if (!student) {
+      const studentObj = await this.studentModel.findById(id);
+      if (!studentObj) {
         throw new NotFoundException('Student not found');
       }
-      return student;
+      return studentObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -63,15 +63,15 @@ export class StudentService {
   /**
    * finds a student from DB using email
    * @param email email of the student you want to find
-   * @returns object of student
+   * @returns {Student} object of student
    */
-  async findByMail(email: string) {
+  async findStudentByMail(email: string) {
     try {
-      const student = await this.studentModel.findOne({ email });
-      if (!student) {
+      const studentObj = await this.studentModel.findOne({ email });
+      if (!studentObj) {
         throw new NotFoundException('Student not found');
       }
-      return student;
+      return studentObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -80,17 +80,20 @@ export class StudentService {
   /**
    * updates the student using given id
    * @param id id of student you want to find
-   * @param updateStudentDto object conataining properties you want to update
-   * @returns object of updated student
+   * @param updateStudentDto object containing properties you want to update
+   * @returns {Student} object of updated student
    */
-  async update(id: string, updateStudentDto: UpdateStudentDto) {
+  async updateStudent(
+    id: string,
+    updateStudentDto: UpdateStudentDto,
+  ): Promise<Student> {
     try {
-      const student = await this.studentModel.findById(id);
-      if (!student) {
+      const studentObj = await this.studentModel.findById(id);
+      if (!studentObj) {
         throw new NotFoundException('Student Not Found');
       }
-      Object.assign(student, updateStudentDto);
-      return student.save();
+      Object.assign(studentObj, updateStudentDto);
+      return studentObj.save();
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -99,9 +102,9 @@ export class StudentService {
   /**
    * deletes a student from the database
    * @param id id of the student you want to delete
-   * @returns object of the deleted student
+   * @returns {Student} object of the deleted student
    */
-  remove(id: string) {
+  removeStudent(id: string): Promise<Student> {
     try {
       const student = this.studentModel.findByIdAndDelete(id);
       if (!student) {
@@ -114,12 +117,12 @@ export class StudentService {
   }
 
   /**
-   * lists the absent student on particulare date
+   * lists the absent student on particular date
    * @param date date you want to check for
-   * @param batchYear (optional) batchyear for filtering
+   * @param batchYear (optional) batchYear for filtering
    * @param department (optional) department for filtering
    * @param semester (optional) semester for filtering
-   * @returns Array of absent students on that date
+   * @returns {[Student]}Array of absent students on that date
    */
   async listAbsentStudents(
     date: string,
@@ -200,10 +203,10 @@ export class StudentService {
 
   /**
    * list all the students with less than 75% attendance
-   * @param batchYear (optional) batchyear for filtering
+   * @param batchYear (optional) batchYear for filtering
    * @param department (optional) department for filtering
    * @param semester (optional) semester for filtering
-   * @returns Array of students with less than 75% attendance
+   * @returns {[Student]} Array of students with less than 75% attendance
    */
   async listLessAttendanceStudents(
     batchYear = undefined,
@@ -320,8 +323,8 @@ export class StudentService {
   }
 
   /**
-   * get year wise analyss of total students in all batches and college
-   * @returns Array of yearly analysis of total students batchwise
+   * get year wise analysis of total students in all batches and college
+   * @returns Array of yearly analysis of total students batch wise
    */
   async getYearlyAnalysis() {
     try {
@@ -415,7 +418,7 @@ export class StudentService {
    * @param branch (optional) for filtering
    * @returns array of year wise vacant seats
    */
-  async getVacnatSeats(
+  async getVacantSeats(
     batchYear: number = undefined,
     branch: string = undefined,
   ) {

@@ -14,12 +14,15 @@ export class DepartmentService {
   /**
    * creates new department in database
    * @param createDepartmentDto object for creating department
-   * @returns object of created department
+   * @returns {Department} object of created department
    */
-  async create(createDepartmentDto: CreateDepartmentDto) {
+  async createDepartment(
+    createDepartmentDto: CreateDepartmentDto,
+  ): Promise<Department> {
     try {
-      const department = await this.departmentModel.create(createDepartmentDto);
-      return department;
+      const departmentObj =
+        await this.departmentModel.create(createDepartmentDto);
+      return departmentObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -27,9 +30,9 @@ export class DepartmentService {
 
   /**
    * lists all departments in the database
-   * @returns array of all departments
+   * @returns {[Departments]} array of all departments
    */
-  async findAll() {
+  async findAllDepartments() {
     try {
       const departments = await this.departmentModel.find();
       return departments;
@@ -41,15 +44,15 @@ export class DepartmentService {
   /**
    * finds an department in DB using Id
    * @param id id of the department you want to find
-   * @returns object of the department
+   * @returns {Department} object of the department
    */
-  async findOne(id: string) {
+  async findOneDepartment(id: string) {
     try {
-      const department = await this.departmentModel.findById(id);
-      if (!department) {
+      const departmentObj = await this.departmentModel.findById(id);
+      if (!departmentObj) {
         throw new NotFoundException('department not found');
       }
-      return department;
+      return departmentObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -58,17 +61,20 @@ export class DepartmentService {
   /**
    * updates the department using given id
    * @param id id of department you want to find
-   * @param updateDepartmentDto object conataining properties you want to update
-   * @returns object of updated department
+   * @param updateDepartmentDto object containing properties you want to update
+   * @returns {Department} object of updated department
    */
-  async update(id: string, updateDepartmentDto: UpdateDepartmentDto) {
+  async updateDepartment(
+    id: string,
+    updateDepartmentDto: UpdateDepartmentDto,
+  ): Promise<Department> {
     try {
-      const department = await this.departmentModel.findById(id);
-      if (!department) {
+      const departmentObj = await this.departmentModel.findById(id);
+      if (!departmentObj) {
         throw new NotFoundException('Department Not Found');
       }
-      Object.assign(department, updateDepartmentDto);
-      return department.save();
+      Object.assign(departmentObj, updateDepartmentDto);
+      return departmentObj.save();
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }
@@ -77,15 +83,15 @@ export class DepartmentService {
   /**
    * deletes a department from the database
    * @param id id of the department you want to delete
-   * @returns object of the deleted department
+   * @returns {Department} object of the deleted department
    */
-  async remove(id: string) {
+  async removeDepartment(id: string): Promise<Department> {
     try {
-      const department = this.departmentModel.findByIdAndDelete(id);
-      if (!department) {
+      const departmentObj = this.departmentModel.findByIdAndDelete(id);
+      if (!departmentObj) {
         throw new NotFoundException('Department not found');
       }
-      return department;
+      return departmentObj;
     } catch (err) {
       throw new HttpException(err.response, err.status);
     }

@@ -69,6 +69,6 @@ export class AttendanceController {
   @HttpCode(200)
   @Post('/vacantSeats')
   getVacantSeats(@Body() body) {
-    return this.studentService.getVacnatSeats(body.batchYear, body.branch);
+    return this.studentService.getVacantSeats(body.batchYear, body.branch);
   }
 }

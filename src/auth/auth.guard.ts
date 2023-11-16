@@ -25,9 +25,9 @@ export class AuthGuard implements CanActivate {
     try {
       let user;
       try {
-        user = await this.studentService.findOne(decoded._id);
+        user = await this.studentService.findOneStudent(decoded._id);
       } catch (err) {
-        user = await this.userService.findOne(decoded._id);
+        user = await this.userService.findOneUser(decoded._id);
       }
 
       if (!user) {

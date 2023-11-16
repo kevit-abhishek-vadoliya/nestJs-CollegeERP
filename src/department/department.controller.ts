@@ -25,13 +25,13 @@ export class DepartmentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Post()
   create(@Body() createDepartmentDto: CreateDepartmentDto) {
-    return this.departmentService.create(createDepartmentDto);
+    return this.departmentService.createDepartment(createDepartmentDto);
   }
 
   //lists all departments in DB
   @Get()
   findAll() {
-    return this.departmentService.findAll();
+    return this.departmentService.findAllDepartments();
   }
 
   //finds one department by ID
@@ -39,7 +39,7 @@ export class DepartmentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.departmentService.findOne(id);
+    return this.departmentService.findOneDepartment(id);
   }
 
   //updates a department
@@ -50,7 +50,7 @@ export class DepartmentController {
     @Param('id') id: string,
     @Body() updateDepartmentDto: UpdateDepartmentDto,
   ) {
-    return this.departmentService.update(id, updateDepartmentDto);
+    return this.departmentService.updateDepartment(id, updateDepartmentDto);
   }
 
   //deletes a department from DB
@@ -58,6 +58,6 @@ export class DepartmentController {
   @UseGuards(AuthGuard, RolesGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.departmentService.remove(id);
+    return this.departmentService.removeDepartment(id);
   }
 }

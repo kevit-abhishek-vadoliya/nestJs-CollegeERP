@@ -24,7 +24,7 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    return this.userService.createUser(createUserDto);
   }
 
   //lists all users in DB
@@ -32,14 +32,14 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Get()
   findAll() {
-    return this.userService.findAll();
+    return this.userService.findAllUsers();
   }
 
   //finds one user using ID
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
+    return this.userService.findOneUser(id);
   }
 
   //updates a user in DB
@@ -47,7 +47,7 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
+    return this.userService.updateUser(id, updateUserDto);
   }
 
   //removes a user from DB
@@ -55,6 +55,6 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(id);
+    return this.userService.removeUser(id);
   }
 }
