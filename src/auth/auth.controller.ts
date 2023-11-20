@@ -24,7 +24,7 @@ export class AuthController {
   //Does the sign out for user
   @UseGuards(AuthGuard)
   @Post('/user/logout')
-  signOutUser(@Req() req: Request) {
+  signOutUser(@Req() req) {
     return this.authService.signOutUser(req);
   }
 
